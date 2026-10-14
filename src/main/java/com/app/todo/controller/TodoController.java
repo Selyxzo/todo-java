@@ -61,4 +61,10 @@ public class TodoController {
                 .status(HttpStatus.OK)
                 .body(response);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id){
+        todoService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

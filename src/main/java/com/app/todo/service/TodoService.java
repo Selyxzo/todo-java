@@ -8,6 +8,7 @@ import com.app.todo.exception.TodoNotFoundException;
 import com.app.todo.repository.TodoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -62,5 +63,12 @@ public class TodoService {
         }
 
         return response;
+    }
+
+    public void delete(UUID id){
+        Todo todo = todoRepository.findById(id)
+                        .orElseThrow(() -> new TodoNotFoundException(id));
+
+        todoRepository.delete(todo);
     }
 }
